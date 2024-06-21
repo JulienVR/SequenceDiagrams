@@ -11,7 +11,7 @@ class Builder:
         self.margin = self.vertical_step / 2  # margin BEFORE drawing any element
         self.stylesheets = []
         self.current_height = 0
-        self.font_size = 20
+        self.font_size = self.parser.context['fontsize']
 
     def draw_participants(self, root, height):
         """ Draw participants (on top of the image) """

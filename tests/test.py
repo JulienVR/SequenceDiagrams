@@ -56,6 +56,7 @@ class Test(unittest.TestCase):
     def test_drawing_boxes(self):
         builder = Builder("""msc {
            arcgradient = "20";
+           fontsize = "15";
            # The entities
            A, B, C, D;
         
@@ -63,10 +64,33 @@ class Test(unittest.TestCase):
            |||;
         
            # Next four on same line due to ','
+           A box A [label="box", textbgcolour="turquoise"],
+           B rbox B [label="rbox"], C abox C [label="abox"] ,
+           D note D [label="note\nline1\nline2"];
+        
+           # Example of the boxes with filled backgrounds
+           A abox B [label="abox", textbgcolour="#ff7f7f"];
+           B rbox C [label="rbox", textbgcolour="#7fff7f"];
+           C note D [label="note", textbgcolour="#7f7fff"];
+        }""")
+        print(builder.parser)
+        image = builder.generate()
+
+    def test_drawing_boxes_hscale(self):
+        builder = Builder("""msc {
+           arcgradient = "10";
+           hscale = "2";
+           # The entities
+           A, B, C, D;
+
+           # Small gap before the boxes
+           |||;
+
+           # Next four on same line due to ','
            A box A [label="box\nturlututu", textbgcolour="turquoise"],
            B rbox B [label="rbox"], C abox C [label="abox"] ,
            D note D [label="note"];
-        
+
            # Example of the boxes with filled backgrounds
            A abox B [label="abox", textbgcolour="#ff7f7f"];
            B rbox C [label="rbox", textbgcolour="#7fff7f"];
